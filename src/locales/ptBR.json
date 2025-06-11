@@ -5,7 +5,8 @@
     "config": "Configuração",
     "designTokens": "Design Tokens",
     "atoms": "Estado (Jotai)",
-    "forms": "Formulários"
+    "forms": "Formulários",
+    "dashboard": "Dashboard"
   },
   "home": {
     "title": "FDTE Boilerplate",
@@ -275,6 +276,40 @@
         "devtools": "Suporte para debugging",
         "serverSide": "Compatível com SSR/SSG"
       }
+    }
+  },
+  "auth": {
+    "userMenu": "Menu do usuário",
+    "logout": "Sair",
+    "login": {
+      "title": "Entrar",
+      "description": "Entre com suas credenciais para acessar sua conta",
+      "email": "Email",
+      "emailPlaceholder": "Digite seu email",
+      "password": "Senha",
+      "passwordPlaceholder": "Digite sua senha",
+      "submit": "Entrar",
+      "loading": "Entrando...",
+      "demoCredentials": "Credenciais para demonstração:"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Área protegida - acesso apenas para usuários autenticados",
+      "accessDenied": "Acesso Negado",
+      "loginRequired": "Você precisa estar logado para acessar esta página",
+      "goToLogin": "Ir para Login",
+      "userInfo": "Informações do Usuário",
+      "welcomeMessage": "Bem-vindo de volta!",
+      "name": "Nome",
+      "email": "Email",
+      "lastLogin": "Último acesso",
+      "actions": "Ações",
+      "actionsDescription": "Gerencie sua conta e configurações",
+      "authenticated": "Autenticado",
+      "secureAccess": "Você tem acesso seguro ao sistema",
+      "logout": "Sair",
+      "demoInfo": "Informações da Demonstração",
+      "demoDescription": "Este é um sistema de autenticação mock para demonstração. Em produção, conecte-se a uma API real de autenticação."
     }
   }
 }

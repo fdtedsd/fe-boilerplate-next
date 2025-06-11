@@ -5,7 +5,8 @@
     "config": "Configuration",
     "designTokens": "Design Tokens",
     "atoms": "State (Jotai)",
-    "forms": "Forms"
+    "forms": "Forms",
+    "dashboard": "Dashboard"
   },
   "home": {
     "title": "FDTE Boilerplate",
@@ -275,6 +276,40 @@
         "devtools": "Debugging support",
         "serverSide": "Compatible with SSR/SSG"
       }
+    }
+  },
+  "auth": {
+    "userMenu": "User menu",
+    "logout": "Logout",
+    "login": {
+      "title": "Login",
+      "description": "Enter your credentials to access your account",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "submit": "Login",
+      "loading": "Logging in...",
+      "demoCredentials": "Demo credentials:"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Protected area - access only for authenticated users",
+      "accessDenied": "Access Denied",
+      "loginRequired": "You need to be logged in to access this page",
+      "goToLogin": "Go to Login",
+      "userInfo": "User Information",
+      "welcomeMessage": "Welcome back!",
+      "name": "Name",
+      "email": "Email",
+      "lastLogin": "Last login",
+      "actions": "Actions",
+      "actionsDescription": "Manage your account and settings",
+      "authenticated": "Authenticated",
+      "secureAccess": "You have secure access to the system",
+      "logout": "Logout",
+      "demoInfo": "Demo Information",
+      "demoDescription": "This is a mock authentication system for demonstration. In production, connect to a real authentication API."
     }
   }
 }

@@ -5,9 +5,11 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAtom } from 'jotai';
-import { Globe, Menu, Palette } from 'lucide-react';
+import { Globe, LogIn, LogOut, Menu, Palette, User } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
+import { currentUserAtom, isAuthenticatedAtom, logoutAtom } from '@/store/atoms/auth';
 import { languageAtom } from '@/store/atoms/language';
 
 import { ThemeToggleButton } from './ThemeToggleButton';
@@ -53,11 +55,20 @@ const navigationItems = [
     key: 'forms',
     icon: '📝',
   },
+  {
+    href: '/dashboard',
+    key: 'dashboard',
+    icon: '🔒',
+  },
 ];
 
 export function Navigation() {
   const { t, i18n } = useTranslation();
+  const router = useRouter();
   const [language, setLanguage] = useAtom(languageAtom);
+  const [isAuthenticated] = useAtom(isAuthenticatedAtom);
+  const [user] = useAtom(currentUserAtom);
+  const [, logout] = useAtom(logoutAtom);
 
   // Inicializar o i18n com o idioma do localStorage na primeira renderização
   useEffect(() => {
@@ -72,6 +83,15 @@ export function Navigation() {
   const changeLanguage = (lng: string) => {
     setLanguage(lng);
     i18n.changeLanguage(lng);
+  };
+
+  const handleAuthAction = () => {
+    if (isAuthenticated) {
+      logout();
+      router.push('/');
+    } else {
+      router.push('/login');
+    }
   };
 
   return (
@@ -104,6 +124,39 @@ export function Navigation() {
 
           {/* Actions - Direita */}
           <div className="flex items-center gap-2">
+            {/* Auth Button */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-9 w-9">
+                  {isAuthenticated ? <User className="h-4 w-4" /> : <LogIn className="h-4 w-4" />}
+                  <span className="sr-only">
+                    {isAuthenticated ? t('auth.userMenu') : t('auth.login.title')}
+                  </span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                {isAuthenticated ? (
+                  <>
+                    <div className="px-2 py-1.5 text-sm font-semibold">{user?.name}</div>
+                    <div className="px-2 py-1.5 text-xs text-muted-foreground">{user?.email}</div>
+                    <DropdownMenuItem onClick={() => router.push('/dashboard')}>
+                      <User className="h-4 w-4 mr-2" />
+                      {t('navigation.dashboard')}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleAuthAction}>
+                      <LogOut className="h-4 w-4 mr-2" />
+                      {t('auth.logout')}
+                    </DropdownMenuItem>
+                  </>
+                ) : (
+                  <DropdownMenuItem onClick={handleAuthAction}>
+                    <LogIn className="h-4 w-4 mr-2" />
+                    {t('auth.login.title')}
+                  </DropdownMenuItem>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             {/* Language Selector */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -168,6 +221,33 @@ export function Navigation() {
                       {t(`navigation.${item.key}`)}
                     </Link>
                   ))}
+
+                  {/* Auth Section in Mobile Menu */}
+                  <div className="border-t pt-3 mt-3">
+                    {isAuthenticated ? (
+                      <>
+                        <div className="px-3 py-2 text-sm">
+                          <p className="font-semibold">{user?.name}</p>
+                          <p className="text-xs text-muted-foreground">{user?.email}</p>
+                        </div>
+                        <button
+                          onClick={handleAuthAction}
+                          className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-accent hover:text-accent-foreground text-left"
+                        >
+                          <LogOut className="h-4 w-4" />
+                          {t('auth.logout')}
+                        </button>
+                      </>
+                    ) : (
+                      <button
+                        onClick={handleAuthAction}
+                        className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-accent hover:text-accent-foreground text-left"
+                      >
+                        <LogIn className="h-4 w-4" />
+                        {t('auth.login.title')}
+                      </button>
+                    )}
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>
