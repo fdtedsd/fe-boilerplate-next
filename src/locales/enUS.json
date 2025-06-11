@@ -1,0 +1,85 @@
+{
+  "hello": "Hello {{name}}!",
+  "app": {
+    "title": "Boilerplate",
+    "description": "shadcn/ui integration demonstration"
+  },
+  "language": {
+    "title": "Language Selection",
+    "description": "Choose your preferred language",
+    "portuguese": "Português",
+    "english": "English",
+    "spanish": "Español",
+    "active": "Active"
+  },
+  "counter": {
+    "title": "Interactive Counter",
+    "description": "Test Button components with global state (Jotai)",
+    "decrement": "Decrement",
+    "reset": "Reset",
+    "increment": "Increment"
+  },
+  "components": {
+    "title": "shadcn/ui Components",
+    "description": "Demonstration of integrated components",
+    "buttonVariations": "Button Variations:",
+    "badgeVariations": "Badge Variations:",
+    "buttons": {
+      "default": "Default",
+      "secondary": "Secondary",
+      "outline": "Outline",
+      "ghost": "Ghost",
+      "link": "Link"
+    },
+    "badges": {
+      "default": "Default",
+      "secondary": "Secondary",
+      "outline": "Outline",
+      "destructive": "Destructive"
+    }
+  },
+  "form": {
+    "title": "Form Demonstration",
+    "description": "Example using shadcn/ui with Tabs, Forms, Switch and more components with Zod + React Hook Form validation",
+    "tabs": {
+      "form": "Form",
+      "preview": "Preview"
+    },
+    "fields": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter your name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "notifications": "Receive notifications"
+    },
+    "submit": "Submit Form",
+    "submitted": "Submitted! ✓",
+    "submitting": "Submitting...",
+    "errors": {
+      "nameRequired": "Name is required",
+      "nameMin": "Name must be at least 2 characters",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Email must be in a valid format"
+    },
+    "preview": {
+      "title": "Form Data:",
+      "name": "Name:",
+      "email": "Email:",
+      "notifications": "Notifications:",
+      "notInformed": "Not informed",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "success": "Form submitted successfully! 🎉"
+    }
+  },
+  "theme": {
+    "title": "Dark Mode",
+    "description": "Test shadcn/ui theme system with dark mode support",
+    "currentTheme": "Current theme:",
+    "lightMode": "☀️ Light Mode",
+    "darkMode": "🌙 Dark Mode",
+    "enableDark": "🌙 Enable Dark Mode",
+    "enableLight": "☀️ Enable Light Mode",
+    "tip": "💡 **Tip:** The theme is saved in localStorage and will be remembered on next visit. shadcn/ui automatically adapts all components to the chosen theme."
+  }
+}

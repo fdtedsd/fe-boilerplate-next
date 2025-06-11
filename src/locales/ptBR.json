@@ -1,0 +1,85 @@
+{
+  "hello": "Olá {{name}}!",
+  "app": {
+    "title": "Boilerplate",
+    "description": "Demonstração da integração com shadcn/ui"
+  },
+  "language": {
+    "title": "Seleção de Idioma",
+    "description": "Escolha seu idioma preferido",
+    "portuguese": "Português",
+    "english": "English",
+    "spanish": "Español",
+    "active": "Ativo"
+  },
+  "counter": {
+    "title": "Contador Interativo",
+    "description": "Teste os componentes Button com estado global (Jotai)",
+    "decrement": "Decrementar",
+    "reset": "Reset",
+    "increment": "Incrementar"
+  },
+  "components": {
+    "title": "Componentes shadcn/ui",
+    "description": "Demonstração dos componentes integrados",
+    "buttonVariations": "Variações de Button:",
+    "badgeVariations": "Variações de Badge:",
+    "buttons": {
+      "default": "Default",
+      "secondary": "Secondary",
+      "outline": "Outline",
+      "ghost": "Ghost",
+      "link": "Link"
+    },
+    "badges": {
+      "default": "Default",
+      "secondary": "Secondary",
+      "outline": "Outline",
+      "destructive": "Destructive"
+    }
+  },
+  "form": {
+    "title": "Demonstração de Formulário",
+    "description": "Exemplo usando shadcn/ui com Tabs, Forms, Switch e mais componentes com validação Zod + React Hook Form",
+    "tabs": {
+      "form": "Formulário",
+      "preview": "Preview"
+    },
+    "fields": {
+      "name": "Nome Completo",
+      "namePlaceholder": "Digite seu nome",
+      "email": "Email",
+      "emailPlaceholder": "seu@email.com",
+      "notifications": "Receber notificações"
+    },
+    "submit": "Enviar Formulário",
+    "submitted": "Enviado! ✓",
+    "submitting": "Enviando...",
+    "errors": {
+      "nameRequired": "Nome é obrigatório",
+      "nameMin": "Nome deve ter pelo menos 2 caracteres",
+      "emailRequired": "Email é obrigatório",
+      "emailInvalid": "Email deve ter um formato válido"
+    },
+    "preview": {
+      "title": "Dados do Formulário:",
+      "name": "Nome:",
+      "email": "Email:",
+      "notifications": "Notificações:",
+      "notInformed": "Não informado",
+      "enabled": "Ativadas",
+      "disabled": "Desativadas",
+      "success": "Formulário enviado com sucesso! 🎉"
+    }
+  },
+  "theme": {
+    "title": "Modo Escuro",
+    "description": "Teste o sistema de temas do shadcn/ui com suporte a modo escuro",
+    "currentTheme": "Tema atual:",
+    "lightMode": "☀️ Modo Claro",
+    "darkMode": "🌙 Modo Escuro",
+    "enableDark": "🌙 Ativar Modo Escuro",
+    "enableLight": "☀️ Ativar Modo Claro",
+    "tip": "💡 **Dica:** O tema é salvo no localStorage e será lembrado na próxima visita. O shadcn/ui adapta automaticamente todos os componentes ao tema escolhido."
+  }
+}
