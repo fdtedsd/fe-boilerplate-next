@@ -1,10 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
+
+import { useTranslation } from 'react-i18next';
 
 import { useDesignTokens } from './DesignTokenProvider';
 
 export function DesignTokensDemo() {
+  const { t } = useTranslation();
   const { overrides, setOverrides } = useDesignTokens();
   const [showDemo, setShowDemo] = useState(false);
 
@@ -32,8 +35,8 @@ export function DesignTokensDemo() {
   };
 
   const presetThemes = {
-    padrao: {},
-    azul: {
+    [t('designTokens.demo.default')]: {},
+    [t('designTokens.demo.blue')]: {
       colors: {
         light: {
           primary: 'oklch(0.5 0.3 240)',
@@ -49,7 +52,7 @@ export function DesignTokensDemo() {
         },
       },
     },
-    verde: {
+    [t('designTokens.demo.green')]: {
       colors: {
         light: {
           primary: 'oklch(0.5 0.3 120)',
@@ -65,7 +68,7 @@ export function DesignTokensDemo() {
         },
       },
     },
-    roxo: {
+    [t('designTokens.demo.purple')]: {
       colors: {
         light: {
           primary: 'oklch(0.5 0.3 300)',
@@ -84,21 +87,22 @@ export function DesignTokensDemo() {
   };
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Sistema de Design Tokens</h2>
+    <div className="max-w-7xl mx-auto p-6 space-y-6">
+      <div className="flex items-center justify-center">
         <button
           onClick={() => setShowDemo(!showDemo)}
           className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-80 transition-opacity"
         >
-          {showDemo ? 'Ocultar' : 'Mostrar'} Controles
+          {showDemo ? t('designTokens.demo.hideControls') : t('designTokens.demo.showControls')}
         </button>
       </div>
 
       {/* Exemplo visual dos tokens aplicados */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className="p-4 bg-card rounded-lg border">
-          <h3 className="font-semibold text-card-foreground mb-2">Cores Primárias</h3>
+          <h3 className="font-semibold text-card-foreground mb-2">
+            {t('designTokens.demo.primaryColors')}
+          </h3>
           <div className="space-y-2">
             <div className="w-full h-10 bg-primary rounded flex items-center justify-center text-primary-foreground text-sm">
               Primary
@@ -113,36 +117,40 @@ export function DesignTokensDemo() {
         </div>
 
         <div className="p-4 bg-muted rounded-lg">
-          <h3 className="font-semibold text-muted-foreground mb-2">Elementos de Interface</h3>
+          <h3 className="font-semibold text-muted-foreground mb-2">
+            {t('designTokens.demo.interfaceElements')}
+          </h3>
           <div className="space-y-2">
             <button className="w-full px-3 py-2 bg-primary text-primary-foreground rounded hover:opacity-80">
-              Botão Primário
+              {t('designTokens.demo.primaryButton')}
             </button>
             <input
               type="text"
-              placeholder="Input de exemplo"
+              placeholder={t('designTokens.demo.inputPlaceholder')}
               className="w-full px-3 py-2 bg-background border border-border rounded focus:ring-2 focus:ring-ring outline-none"
             />
             <div className="p-2 bg-destructive/10 text-destructive rounded text-sm">
-              Mensagem de erro
+              {t('designTokens.demo.errorMessage')}
             </div>
           </div>
         </div>
 
         <div className="p-4 bg-card rounded-lg border">
-          <h3 className="font-semibold text-card-foreground mb-2">Border Radius</h3>
+          <h3 className="font-semibold text-card-foreground mb-2">
+            {t('designTokens.demo.borderRadius')}
+          </h3>
           <div className="space-y-2">
             <div className="w-full h-8 bg-primary rounded-sm flex items-center justify-center text-primary-foreground text-xs">
-              Small
+              {t('designTokens.demo.small')}
             </div>
             <div className="w-full h-8 bg-primary rounded-md flex items-center justify-center text-primary-foreground text-xs">
-              Medium
+              {t('designTokens.demo.medium')}
             </div>
             <div className="w-full h-8 bg-primary rounded-lg flex items-center justify-center text-primary-foreground text-xs">
-              Large
+              {t('designTokens.demo.large')}
             </div>
             <div className="w-full h-8 bg-primary rounded-xl flex items-center justify-center text-primary-foreground text-xs">
-              Extra Large
+              {t('designTokens.demo.extraLarge')}
             </div>
           </div>
         </div>
@@ -150,17 +158,17 @@ export function DesignTokensDemo() {
 
       {showDemo && (
         <div className="space-y-6 p-6 bg-muted/50 rounded-lg">
-          <h3 className="text-lg font-semibold">Controles de Design Tokens</h3>
+          <h3 className="text-lg font-semibold">{t('designTokens.demo.designTokensControls')}</h3>
 
           {/* Temas pré-definidos */}
           <div>
-            <h4 className="font-medium mb-2">Temas Pré-definidos</h4>
+            <h4 className="font-medium mb-2">{t('designTokens.demo.predefinedThemes')}</h4>
             <div className="flex gap-2 flex-wrap">
               {Object.entries(presetThemes).map(([name, theme]) => (
                 <button
                   key={name}
                   onClick={() => setOverrides(theme)}
-                  className="px-3 py-1 bg-secondary text-secondary-foreground rounded hover:bg-accent hover:text-accent-foreground transition-colors capitalize"
+                  className="px-3 py-1 bg-secondary text-secondary-foreground rounded hover:bg-accent hover:text-accent-foreground transition-colors"
                 >
                   {name}
                 </button>
@@ -170,7 +178,7 @@ export function DesignTokensDemo() {
 
           {/* Controle de radius */}
           <div>
-            <h4 className="font-medium mb-2">Border Radius</h4>
+            <h4 className="font-medium mb-2">{t('designTokens.demo.borderRadius')}</h4>
             <input
               type="range"
               min="0"
@@ -184,7 +192,9 @@ export function DesignTokensDemo() {
 
           {/* Controles de cores customizadas */}
           <div>
-            <h4 className="font-medium mb-2">Cores Customizadas (Modo Claro)</h4>
+            <h4 className="font-medium mb-2">
+              {t('designTokens.demo.customColors')} ({t('designTokens.demo.lightMode')})
+            </h4>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {['primary', 'secondary', 'accent', 'destructive'].map((color) => (
                 <div key={color} className="space-y-1">
@@ -202,46 +212,35 @@ export function DesignTokensDemo() {
             </div>
           </div>
 
-          {/* Carregar JSON customizado */}
+          {/* Dark mode colors */}
           <div>
-            <h4 className="font-medium mb-2">Carregar JSON Customizado</h4>
-            <input
-              type="file"
-              accept=".json"
-              onChange={async (e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  try {
-                    const text = await file.text();
-                    const customTokens = JSON.parse(text);
-                    setOverrides(customTokens);
-                  } catch (error) {
-                    alert('Erro ao carregar o arquivo JSON: ' + error);
-                  }
-                }
-              }}
-              className="w-full px-3 py-2 border border-border rounded bg-background"
-            />
+            <h4 className="font-medium mb-2">
+              {t('designTokens.demo.customColors')} ({t('designTokens.demo.darkMode')})
+            </h4>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {['primary', 'secondary', 'accent', 'destructive'].map((color) => (
+                <div key={color} className="space-y-1">
+                  <label className="text-sm font-medium capitalize">{color}</label>
+                  <input
+                    type="color"
+                    onChange={() => {
+                      const oklchValue = `oklch(0.7 0.3 ${Math.random() * 360})`;
+                      handleColorChange('dark', color, oklchValue);
+                    }}
+                    className="w-full h-10 rounded border"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Exportar configuração atual */}
-          <div>
-            <h4 className="font-medium mb-2">Exportar Configuração</h4>
+          {/* Reset button */}
+          <div className="pt-4 border-t">
             <button
-              onClick={() => {
-                const dataStr = JSON.stringify(overrides, null, 2);
-                const dataUri =
-                  'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
-                const exportFileDefaultName = 'design-tokens-custom.json';
-
-                const linkElement = document.createElement('a');
-                linkElement.setAttribute('href', dataUri);
-                linkElement.setAttribute('download', exportFileDefaultName);
-                linkElement.click();
-              }}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded hover:opacity-80"
+              onClick={() => setOverrides({})}
+              className="px-4 py-2 bg-destructive text-destructive-foreground rounded hover:opacity-80 transition-opacity"
             >
-              Baixar JSON
+              Reset to Default
             </button>
           </div>
         </div>

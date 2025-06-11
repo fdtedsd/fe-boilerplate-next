@@ -154,7 +154,7 @@ export function DemoForm() {
                 {Object.keys(errors).length > 0 && (
                   <div className="p-4 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg">
                     <h4 className="text-sm font-medium text-red-800 dark:text-red-200 mb-2">
-                      Erros de validação:
+                      {t('form.preview.validationStatus')}
                     </h4>
                     <ul className="text-sm text-red-700 dark:text-red-300 space-y-1">
                       {Object.entries(errors).map(([field, error]) => (
@@ -194,12 +194,12 @@ export function DemoForm() {
 
               {/* Status de validação */}
               <div className="space-y-2">
-                <h4 className="text-sm font-medium">Status de Validação:</h4>
+                <h4 className="text-sm font-medium">{t('form.preview.validationStatus')}</h4>
                 <div className="flex items-center gap-2">
                   <Badge variant={Object.keys(errors).length === 0 ? 'default' : 'destructive'}>
                     {Object.keys(errors).length === 0
-                      ? '✓ Válido'
-                      : `${Object.keys(errors).length} erro(s)`}
+                      ? t('form.preview.valid')
+                      : `${Object.keys(errors).length} ${t('form.preview.errors')}`}
                   </Badge>
                 </div>
               </div>

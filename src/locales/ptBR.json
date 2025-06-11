@@ -1,49 +1,144 @@
 {
   "hello": "Olá {{name}}!",
-  "app": {
-    "title": "Boilerplate",
-    "description": "Demonstração da integração com shadcn/ui"
+  "navigation": {
+    "home": "Início",
+    "config": "Configuração",
+    "designTokens": "Design Tokens",
+    "atoms": "Estado (Jotai)",
+    "forms": "Formulários"
   },
-  "language": {
-    "title": "Seleção de Idioma",
-    "description": "Escolha seu idioma preferido",
-    "portuguese": "Português",
-    "english": "English",
-    "spanish": "Español",
-    "active": "Ativo"
-  },
-  "counter": {
-    "title": "Contador Interativo",
-    "description": "Teste os componentes Button com estado global (Jotai)",
-    "decrement": "Decrementar",
-    "reset": "Reset",
-    "increment": "Incrementar"
-  },
-  "components": {
-    "title": "Componentes shadcn/ui",
-    "description": "Demonstração dos componentes integrados",
-    "buttonVariations": "Variações de Button:",
-    "badgeVariations": "Variações de Badge:",
-    "buttons": {
-      "default": "Default",
-      "secondary": "Secondary",
-      "outline": "Outline",
-      "ghost": "Ghost",
-      "link": "Link"
+  "home": {
+    "title": "FDTE Boilerplate",
+    "subtitle": "Boilerplate moderno para aplicações Next.js com TypeScript, shadcn/ui, internacionalização e sistema completo de Design Tokens.",
+    "exploreDesignTokens": "Explorar Design Tokens",
+    "seeGlobalState": "Ver Estado Global",
+    "technologies": {
+      "title": "Tecnologias Incluídas",
+      "subtitle": "Stack moderna com as melhores práticas e ferramentas do mercado"
     },
-    "badges": {
-      "default": "Default",
-      "secondary": "Secondary",
-      "outline": "Outline",
-      "destructive": "Destructive"
+    "explore": {
+      "title": "Explore o Boilerplate",
+      "subtitle": "Navegue pelas diferentes seções para conhecer todos os recursos",
+      "configSection": {
+        "title": "Configuração & Layout",
+        "description": "Explore as configurações do projeto e estrutura de layout"
+      },
+      "designTokensSection": {
+        "title": "Design Tokens",
+        "description": "Sistema completo de tokens: cores, tipografia, espaçamentos"
+      },
+      "atomsSection": {
+        "title": "Estado Global (Jotai)",
+        "description": "Gerenciamento de estado com atoms do Jotai"
+      },
+      "formsSection": {
+        "title": "Formulários",
+        "description": "Formulários completos com validação e experiência de usuário"
+      },
+      "exploreButton": "Explorar"
+    },
+    "footer": {
+      "text": "Desenvolvido pela equipe FDTE com ❤️ usando Next.js e shadcn/ui"
     }
+  },
+  "config": {
+    "title": "Configuração & Layout",
+    "description": "Explore a estrutura do projeto e configurações utilizadas no boilerplate",
+    "projectStructure": {
+      "title": "Estrutura do Projeto",
+      "main": "Diretório principal do código fonte",
+      "appRouter": "App Router do Next.js 15",
+      "components": "Componentes React reutilizáveis",
+      "lib": "Utilitários e configurações",
+      "providers": "Context providers (Theme, i18n, State)",
+      "store": "Estado global com Jotai",
+      "locales": "Arquivos de tradução",
+      "i18n": "Configuração de internacionalização"
+    },
+    "configFiles": {
+      "title": "Arquivos de Configuração",
+      "nextConfig": {
+        "description": "Configuração do Next.js com TypeScript",
+        "features": ["App Router", "Otimizações", "Middleware"]
+      },
+      "tailwindConfig": {
+        "description": "Configuração do Tailwind CSS",
+        "features": ["Design Tokens", "Temas", "Animações"]
+      },
+      "tsConfig": {
+        "description": "Configuração do TypeScript",
+        "features": ["Path mapping", "Strict mode", "Decorators"]
+      },
+      "componentsJson": {
+        "description": "Configuração do shadcn/ui",
+        "features": ["Componentes", "Estilos", "Aliases"]
+      },
+      "designTokens": {
+        "description": "Sistema de Design Tokens",
+        "features": ["Cores", "Tipografia", "Espaçamentos"]
+      }
+    },
+    "technologies": {
+      "title": "Stack Tecnológico",
+      "framework": "Framework",
+      "styling": "Estilização",
+      "stateI18n": "Estado & i18n",
+      "quality": "Qualidade",
+      "descriptions": {
+        "nextjs": "Framework React",
+        "react": "Biblioteca UI",
+        "typescript": "Tipagem estática",
+        "tailwind": "CSS utilitário",
+        "shadcn": "Componentes UI",
+        "radix": "Primitivos acessíveis",
+        "lucide": "Ícones",
+        "jotai": "Estado global",
+        "nextIntl": "Internacionalização",
+        "nextThemes": "Sistema de temas",
+        "eslint": "Linting",
+        "prettier": "Formatação",
+        "jest": "Testes unitários",
+        "husky": "Git hooks"
+      }
+    }
+  },
+  "designTokens": {
+    "title": "Design Tokens",
+    "description": "Sistema completo de design tokens: cores, tipografia, espaçamentos e temas personalizáveis para o seu projeto",
+    "demo": {
+      "showControls": "Mostrar Controles",
+      "hideControls": "Ocultar Controles",
+      "primaryColors": "Cores Primárias",
+      "interfaceElements": "Elementos de Interface",
+      "primaryButton": "Botão Primário",
+      "inputPlaceholder": "Input de exemplo",
+      "errorMessage": "Mensagem de erro",
+      "borderRadius": "Border Radius",
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large",
+      "extraLarge": "Extra Large",
+      "designTokensControls": "Controles de Design Tokens",
+      "predefinedThemes": "Temas Pré-definidos",
+      "default": "Padrão",
+      "blue": "Azul",
+      "green": "Verde",
+      "purple": "Roxo",
+      "customColors": "Cores Customizadas",
+      "lightMode": "Modo Claro",
+      "darkMode": "Modo Escuro"
+    }
+  },
+  "forms": {
+    "title": "Formulários",
+    "description": "Demonstração completa de formulários com validação usando React Hook Form, Zod e componentes shadcn/ui"
   },
   "form": {
     "title": "Demonstração de Formulário",
     "description": "Exemplo usando shadcn/ui com Tabs, Forms, Switch e mais componentes com validação Zod + React Hook Form",
     "tabs": {
       "form": "Formulário",
-      "preview": "Preview"
+      "preview": "Visualização"
     },
     "fields": {
       "name": "Nome Completo",
@@ -69,17 +164,117 @@
       "notInformed": "Não informado",
       "enabled": "Ativadas",
       "disabled": "Desativadas",
-      "success": "Formulário enviado com sucesso! 🎉"
+      "success": "Formulário enviado com sucesso! 🎉",
+      "validationStatus": "Status de Validação:",
+      "valid": "✓ Válido",
+      "errors": "erro(s)"
     }
   },
   "theme": {
     "title": "Modo Escuro",
-    "description": "Teste o sistema de temas do shadcn/ui com suporte a modo escuro",
+    "description": "Teste o sistema de temas do shadcn/ui com suporte ao modo escuro",
     "currentTheme": "Tema atual:",
     "lightMode": "☀️ Modo Claro",
     "darkMode": "🌙 Modo Escuro",
     "enableDark": "🌙 Ativar Modo Escuro",
     "enableLight": "☀️ Ativar Modo Claro",
     "tip": "💡 **Dica:** O tema é salvo no localStorage e será lembrado na próxima visita. O shadcn/ui adapta automaticamente todos os componentes ao tema escolhido."
+  },
+  "atoms": {
+    "title": "Atoms do Jotai",
+    "description": "Demonstração do gerenciamento de estado global usando atoms do Jotai",
+    "tabs": {
+      "basic": "Básicos",
+      "derived": "Derivados",
+      "storage": "Storage",
+      "advanced": "Avançados"
+    },
+    "basic": {
+      "title": "Atoms Básicos",
+      "description": "Atoms simples para armazenar e atualizar valores",
+      "counter": {
+        "title": "Counter Atom",
+        "code": "const counterAtom = atom(0)"
+      },
+      "message": {
+        "title": "Message Atom",
+        "placeholder": "Digite uma mensagem...",
+        "clear": "Limpar",
+        "messageLabel": "Mensagem:",
+        "code": "const messageAtom = atom('')"
+      },
+      "user": {
+        "title": "User Object Atom",
+        "nameLabel": "Nome",
+        "namePlaceholder": "Seu nome",
+        "emailLabel": "Email",
+        "emailPlaceholder": "seu@email.com",
+        "userLabel": "Usuario:",
+        "notInformed": "Não informado",
+        "code": "const userAtom = atom({ name: '', email: '' })"
+      }
+    },
+    "derived": {
+      "title": "Atoms Derivados",
+      "description": "Atoms que derivam valores de outros atoms",
+      "computed": {
+        "title": "Counter Doubled (Computed)",
+        "original": "Original",
+        "doubled": "Dobrado",
+        "code": "const doubledAtom = atom((get) => get(counterAtom) * 2)"
+      },
+      "writeOnly": {
+        "title": "Increment By (Write-only)",
+        "button": "Incrementar por {{amount}}",
+        "current": "Atual: {{value}}",
+        "code": "const incrementByAtom = atom(null, (get, set, amount) => ...)"
+      }
+    },
+    "storage": {
+      "title": "Atoms com Storage",
+      "description": "Atoms que persistem dados no localStorage",
+      "language": {
+        "title": "Language Atom (já em uso na navegação)",
+        "code": "const languageAtom = atomWithStorage('app-language', '')"
+      },
+      "preferences": {
+        "title": "Preferences Atom",
+        "notifications": "Notificações",
+        "activated": "Ativadas",
+        "deactivated": "Desativadas",
+        "theme": "Tema",
+        "savedPreferences": "Preferências salvas:",
+        "code": "const preferencesAtom = atomWithStorage('user-preferences', defaultValues)"
+      }
+    },
+    "advanced": {
+      "title": "Conceitos Avançados",
+      "description": "Informações sobre padrões avançados do Jotai",
+      "atomFamilies": {
+        "title": "Atom Families",
+        "description": "Criar atoms dinamicamente baseado em parâmetros"
+      },
+      "asyncAtoms": {
+        "title": "Async Atoms",
+        "description": "Atoms que trabalham com Promises e dados assíncronos"
+      },
+      "loadable": {
+        "title": "Loadable",
+        "description": "Gerenciar estados de loading para atoms assíncronos"
+      },
+      "splitAtoms": {
+        "title": "Split Atoms",
+        "description": "Dividir arrays em atoms individuais"
+      },
+      "advantages": {
+        "title": "Vantagens do Jotai",
+        "atomic": "Estado granular sem over-rendering",
+        "typescript": "Tipagem forte por padrão",
+        "noBoilerplate": "Sintaxe simples e direta",
+        "suspense": "Funciona nativamente com Suspense",
+        "devtools": "Suporte para debugging",
+        "serverSide": "Compatível com SSR/SSG"
+      }
+    }
   }
 }
