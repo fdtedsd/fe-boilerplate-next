@@ -1,88 +1,61 @@
 # Sistema de Design Tokens
 
-Este projeto implementa um sistema flexível de design tokens que permite sobrepor os valores padrão do Tailwind CSS através de arquivos JSON.
+Este projeto implementa um sistema simples e eficiente de design tokens usando variáveis CSS e Tailwind.
 
 ## 📋 Funcionalidades
 
 - ✅ **Tokens Dinâmicos**: Altere cores, espaçamentos e tipografia em tempo real
-- ✅ **Override por JSON**: Carregue configurações personalizadas de arquivos JSON
-- ✅ **Temas Pré-definidos**: Troque entre diferentes paletas de cores
 - ✅ **Compatibilidade Tailwind**: Funciona com todas as classes utilitárias do Tailwind
 - ✅ **TypeScript**: Tipagem completa para segurança de tipos
 - ✅ **Modo Claro/Escuro**: Suporte nativo para temas light e dark
 
 ## 🚀 Como Usar
 
-### 1. Configuração Básica
+### 1. Definindo Cores
 
-O sistema está configurado automaticamente no projeto. Os tokens padrão estão em `design-tokens.json`.
+As cores são definidas no arquivo `globals.css` usando variáveis CSS:
 
-### 2. Usando o Hook
+```css
+:root {
+  --minha-cor: #3b82f6; /* Cor para tema claro */
+}
 
-```tsx
-import { useDesignTokens } from '@/components/DesignTokenProvider';
+.dark {
+  --minha-cor: #60a5fa; /* Cor para tema escuro */
+}
+```
 
-function MeuComponente() {
-  const { overrides, setOverrides } = useDesignTokens();
+### 2. Configurando o Tailwind
 
-  // Alterar cores programaticamente
-  const mudarTema = () => {
-    setOverrides({
+Adicione a cor no arquivo `tailwind.config.ts`:
+
+```typescript
+const config: Config = {
+  theme: {
+    extend: {
       colors: {
-        light: {
-          primary: 'oklch(0.5 0.3 120)', // Verde
-        },
+        'minha-cor': 'var(--minha-cor)',
       },
-    });
-  };
-
-  return <button onClick={mudarTema}>Mudar para Verde</button>;
-}
-```
-
-### 3. Arquivo JSON Customizado
-
-Crie um arquivo JSON com as suas customizações:
-
-```json
-{
-  "colors": {
-    "light": {
-      "primary": "oklch(0.5 0.3 240)",
-      "accent": "oklch(0.95 0.1 240)"
     },
-    "dark": {
-      "primary": "oklch(0.7 0.3 240)",
-      "accent": "oklch(0.2 0.1 240)"
-    }
   },
-  "spacing": {
-    "radius": "1.5rem"
-  }
-}
+};
 ```
 
-### 4. Carregando JSON Externo
+### 3. Usando nos Componentes
+
+Use as cores diretamente com as classes do Tailwind:
 
 ```tsx
-import { useDesignTokens } from '@/components/DesignTokenProvider';
-
-function CarregarTema() {
-  const { loadTokensFromFile } = useDesignTokens();
-
-  return (
-    <button onClick={() => loadTokensFromFile('/meu-tema.json')}>
-      Carregar Tema Personalizado
-    </button>
-  );
-}
+<div className="text-minha-cor">Texto com minha cor</div>
+<div className="bg-minha-cor">Fundo com minha cor</div>
+<div className="border-minha-cor">Borda com minha cor</div>
 ```
 
-## 📚 Estrutura dos Tokens
+## 📚 Estrutura das Cores
 
-### Cores
+### Cores do Sistema
 
-Todas as cores usam o formato OKLCH para melhor consistência:
+O sistema já vem com várias cores pré-definidas:
 
 - `background`: Cor de fundo principal
 - `foreground`: Cor do texto principal
@@ -97,66 +70,80 @@ Todas as cores usam o formato OKLCH para melhor consistência:
 - `input`: Cor de fundo dos inputs
 - `ring`: Cor do focus ring
 
-### Espaçamento
+### Adicionando Novas Cores
 
-- `radius`: Border radius base (outras variações são calculadas automaticamente)
+Para adicionar uma nova cor:
 
-### Tipografia
-
-- `font-family`: Famílias de fontes
-- `font-size`: Tamanhos de fonte
-
-## 🎨 Paleta de Cores OKLCH
-
-O sistema usa o espaço de cores OKLCH que oferece:
-
-- **Melhor consistência** perceptual
-- **Manipulação mais intuitiva** de brilho e saturação
-- **Compatibilidade futura** com displays wide-gamut
-
-Formato: `oklch(luminance chroma hue)`
-
-Exemplos:
+1. Adicione a variável CSS no `globals.css`:
 
 ```css
-oklch(0.5 0.3 240)  /* Azul médio */
-oklch(0.8 0.2 120)  /* Verde claro */
-oklch(0.3 0.4 300)  /* Roxo escuro */
+:root {
+  --nova-cor: #10b981; /* Cor para tema claro */
+}
+
+.dark {
+  --nova-cor: #34d399; /* Cor para tema escuro */
+}
+```
+
+2. Adicione no `tailwind.config.ts`:
+
+```typescript
+colors: {
+  'nova-cor': 'var(--nova-cor)'
+}
+```
+
+3. Use nos componentes:
+
+```tsx
+<div className="text-nova-cor">Texto com nova cor</div>
+```
+
+## 🎨 Paleta de Cores
+
+O sistema suporta qualquer formato de cor CSS:
+
+```css
+:root {
+  --cor-hex: #3b82f6;
+  --cor-rgb: rgb(59, 130, 246);
+  --cor-rgba: rgba(59, 130, 246, 0.5);
+  --cor-hsl: hsl(217, 91%, 60%);
+  --cor-oklch: oklch(0.5 0.3 240);
+}
 ```
 
 ## 🛠️ Casos de Uso
 
-### 1. White Label / Multi-tenant
+### 1. Tema Claro/Escuro
+
+O sistema troca automaticamente entre temas:
 
 ```tsx
-// Carregar tema baseado no cliente
-useEffect(() => {
-  const clientId = getClientId();
-  loadTokensFromFile(\`/themes/\${clientId}.json\`);
-}, []);
+import { useTheme } from '@/providers/ThemeProvider';
+
+function MeuComponente() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <button onClick={toggleTheme}>Trocar para {theme === 'light' ? 'escuro' : 'claro'}</button>
+  );
+}
 ```
 
-### 2. A/B Testing de Temas
+### 2. Preferências do Usuário
+
+Você pode salvar a preferência do tema:
 
 ```tsx
-const temaA = { colors: { light: { primary: 'oklch(0.5 0.3 220)' } } };
-const temaB = { colors: { light: { primary: 'oklch(0.5 0.3 120)' } } };
-
-// Aplicar baseado no grupo do usuário
-setOverrides(userGroup === 'A' ? temaA : temaB);
-```
-
-### 3. Preferências do Usuário
-
-```tsx
-// Salvar/carregar preferências
-const salvarPreferencias = () => {
-  localStorage.setItem('design-tokens', JSON.stringify(overrides));
+const salvarPreferencia = () => {
+  localStorage.setItem('theme', theme);
 };
 
-const carregarPreferencias = () => {
-  const saved = localStorage.getItem('design-tokens');
-  if (saved) setOverrides(JSON.parse(saved));
+const carregarPreferencia = () => {
+  const saved = localStorage.getItem('theme');
+  if (saved) setTheme(saved as 'light' | 'dark');
 };
 ```
 
@@ -164,14 +151,13 @@ const carregarPreferencias = () => {
 
 ### Adicionando Novos Tokens
 
-1. Atualize `design-tokens.json` com os novos valores
-2. Modifique a interface `DesignTokens` em `design-tokens.ts`
-3. Atualize a função `generateCustomCSS` se necessário
-4. Adicione as novas variáveis CSS no `@theme inline` do `globals.css`
+1. Adicione a variável CSS no `globals.css`
+2. Configure no `tailwind.config.ts`
+3. Use nos componentes com classes do Tailwind
 
 ### Debugging
 
-Use o componente `DesignTokensDemo` para visualizar e testar mudanças em tempo real.
+Use o DevTools do navegador para inspecionar as variáveis CSS e verificar se estão sendo aplicadas corretamente.
 
 ## 📖 Exemplos
 

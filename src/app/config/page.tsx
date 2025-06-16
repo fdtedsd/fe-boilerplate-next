@@ -53,11 +53,6 @@ export default function ConfigPage() {
       description: t('config.configFiles.componentsJson.description'),
       features: ['Componentes', 'Estilos', 'Aliases'],
     },
-    {
-      name: 'design-tokens.json',
-      description: t('config.configFiles.designTokens.description'),
-      features: ['Cores', 'Tipografia', 'Espaçamentos'],
-    },
   ];
 
   const technologies = [

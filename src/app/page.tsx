@@ -2,7 +2,7 @@
 
 import { useTranslation } from 'react-i18next';
 
-import { Code, Palette, Settings, Wrench } from 'lucide-react';
+import { Code, Settings, Wrench } from 'lucide-react';
 import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
@@ -60,13 +60,6 @@ export default function Home() {
       color: 'bg-blue-500',
     },
     {
-      title: t('home.explore.designTokensSection.title'),
-      description: t('home.explore.designTokensSection.description'),
-      href: '/design-tokens',
-      icon: Palette,
-      color: 'bg-purple-500',
-    },
-    {
       title: t('home.explore.atomsSection.title'),
       description: t('home.explore.atomsSection.description'),
       href: '/atoms',
@@ -87,6 +80,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-8 md:py-12 lg:py-24">
         <div className="mx-auto flex max-w-[980px] flex-col items-center gap-4 text-center">
+          <div className="text-minha-cor">Teste</div>
           <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
             {t('home.title')}
           </h1>
@@ -94,9 +88,6 @@ export default function Home() {
             {t('home.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg">
-              <Link href="/design-tokens">{t('home.exploreDesignTokens')}</Link>
-            </Button>
             <Button variant="outline" size="lg" asChild>
               <Link href="/atoms">{t('home.seeGlobalState')}</Link>
             </Button>

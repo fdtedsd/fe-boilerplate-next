@@ -41,11 +41,6 @@ const navigationItems = [
     icon: '⚙️',
   },
   {
-    href: '/design-tokens',
-    key: 'designTokens',
-    icon: '🎨',
-  },
-  {
     href: '/atoms',
     key: 'atoms',
     icon: '⚛️',

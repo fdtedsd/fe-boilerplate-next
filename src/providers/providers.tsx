@@ -2,14 +2,14 @@
 
 import { Provider } from 'jotai';
 
-import { DesignTokenProvider } from '@/components/DesignTokenProvider';
+import { ThemeProvider } from './ThemeProvider';
 
 import '@/i18n';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <Provider>
-      <DesignTokenProvider>{children}</DesignTokenProvider>
+      <ThemeProvider>{children}</ThemeProvider>
     </Provider>
   );
 }
