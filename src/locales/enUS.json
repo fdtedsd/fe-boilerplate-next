@@ -6,7 +6,8 @@
     "designTokens": "Design Tokens",
     "atoms": "State (Jotai)",
     "forms": "Forms",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "notifications": "Notifications"
   },
   "home": {
     "title": "FDTE Boilerplate",

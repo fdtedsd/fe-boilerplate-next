@@ -5,12 +5,13 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAtom } from 'jotai';
-import { Bell, Globe, LogIn, LogOut, Menu, Palette, User } from 'lucide-react';
+import { Bell, Globe, LogIn, LogOut, Menu, Palette, Trash2, User } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { currentUserAtom, isAuthenticatedAtom, logoutAtom } from '@/store/atoms/auth';
 import { languageAtom } from '@/store/atoms/language';
+import { useNotifications } from '@/hooks/useNotifications';
 
 import { ThemeToggleButton } from './ThemeToggleButton';
 import { Button } from './ui/button';
@@ -55,6 +56,11 @@ const navigationItems = [
     key: 'dashboard',
     icon: '🔒',
   },
+  {
+    href: '/notifications',
+    key: 'notifications',
+    icon: '🔔',
+  },
 ];
 
 export function Navigation() {
@@ -64,6 +70,23 @@ export function Navigation() {
   const [isAuthenticated] = useAtom(isAuthenticatedAtom);
   const [user] = useAtom(currentUserAtom);
   const [, logout] = useAtom(logoutAtom);
+  
+  // Hook para notificações SSE
+  console.log('🔔 Navigation - User:', user);
+  console.log('🔔 Navigation - User ID:', user?.id);
+  console.log('🔔 Navigation - Is Authenticated:', isAuthenticated);
+  
+  const {
+    notifications,
+    unreadCount,
+    markAsRead,
+    markAllAsRead,
+    removeNotification,
+    formatTimestamp,
+  } = useNotifications();
+  
+  console.log('🔔 Navigation - Notifications count:', notifications.length);
+  console.log('🔔 Navigation - Unread count:', unreadCount);
 
   // Inicializar o i18n com o idioma do localStorage na primeira renderização
   useEffect(() => {
@@ -125,70 +148,103 @@ export function Navigation() {
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon" className="h-9 w-9 relative">
                     <Bell className="h-4 w-4" />
-                    <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 text-xs text-white flex items-center justify-center">
-                      3
-                    </span>
+                    {/* Badge de notificações não lidas */}
+                    {unreadCount > 0 && (
+                      <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 text-xs text-white flex items-center justify-center">
+                        {unreadCount > 99 ? '99+' : unreadCount}
+                      </span>
+                    )}
                     <span className="sr-only">Notificações</span>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-80">
                   <div className="px-3 py-2 border-b">
                     <h3 className="font-semibold text-sm">Notificações</h3>
-                    <p className="text-xs text-muted-foreground">Você tem 3 notificações não lidas</p>
+                    <p className="text-xs text-muted-foreground">
+                      {unreadCount > 0 
+                        ? `Você tem ${unreadCount} notificação${unreadCount > 1 ? 'es' : ''} não lida${unreadCount > 1 ? 's' : ''}`
+                        : 'Nenhuma notificação não lida'
+                      }
+                    </p>
                   </div>
 
                   <div className="max-h-64 overflow-y-auto">
-                    <DropdownMenuItem className="flex flex-col items-start p-3 cursor-pointer hover:bg-accent">
-                      <div className="flex items-start gap-2 w-full">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium">Nova mensagem</p>
-                          <p className="text-xs text-muted-foreground truncate">
-                            Bob enviou uma mensagem para você
-                          </p>
-                          <p className="text-xs text-muted-foreground mt-1">Há 5 minutos</p>
-                        </div>
+                    {notifications.length > 0 ? (
+                      notifications.map((notification) => (
+                        <DropdownMenuItem 
+                          key={notification.id} 
+                          className={`flex flex-col items-start p-3 cursor-pointer hover:bg-accent group ${
+                            !notification.isRead ? 'bg-blue-50 dark:bg-blue-950/20' : ''
+                          }`}
+                          onClick={() => markAsRead(notification.id)}
+                        >
+                          <div className="flex items-start gap-2 w-full">
+                            {/* Indicador de prioridade */}
+                            <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
+                              notification.priority === 'high' ? 'bg-red-500' :
+                              notification.priority === 'medium' ? 'bg-blue-500' : 'bg-yellow-500'
+                            }`}></div>
+                            
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium">{notification.title}</p>
+                              <p className="text-xs text-muted-foreground truncate">
+                                {notification.content}
+                              </p>
+                              {notification.sender && (
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  De: {notification.sender}
+                                </p>
+                              )}
+                              <p className="text-xs text-muted-foreground mt-1">
+                                {formatTimestamp(notification.timestamp)}
+                              </p>
+                            </div>
+                            
+                            {/* Botão para remover */}
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                removeNotification(notification.id);
+                              }}
+                            >
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </DropdownMenuItem>
+                      ))
+                    ) : (
+                      <div className="px-3 py-8 text-center">
+                        <p className="text-sm text-muted-foreground">Nenhuma notificação</p>
                       </div>
-                    </DropdownMenuItem>
-
-                    <DropdownMenuItem className="flex flex-col items-start p-3 cursor-pointer hover:bg-accent">
-                      <div className="flex items-start gap-2 w-full">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium">Nova mensagem</p>
-                          <p className="text-xs text-muted-foreground truncate">
-                            Alice enviou uma mensagem para você
-                          </p>
-                          <p className="text-xs text-muted-foreground mt-1">há 1 hora</p>
-                        </div>
-                      </div>
-                    </DropdownMenuItem>
-
-                    <DropdownMenuItem className="flex flex-col items-start p-3 cursor-pointer hover:bg-accent">
-                      <div className="flex items-start gap-2 w-full">
-                        <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium">Lembrete</p>
-                          <p className="text-xs text-muted-foreground truncate">
-                            Reunião de equipe amanhã às 10:00
-                          </p>
-                          <p className="text-xs text-muted-foreground mt-1">há 2 horas</p>
-                        </div>
-                      </div>
-                    </DropdownMenuItem>
+                    )}
                   </div>
 
                   {/* Footer com ações */}
-                  <div className="px-3 py-2 border-t">
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm" className="flex-1 text-xs">
-                        Marcar todas como lidas
-                      </Button>
-                      <Button variant="outline" size="sm" className="flex-1 text-xs">
-                        Ver todas
-                      </Button>
+                  {notifications.length > 0 && (
+                    <div className="px-3 py-2 border-t">
+                      <div className="flex gap-2">
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="flex-1 text-xs"
+                          onClick={markAllAsRead}
+                        >
+                          Marcar todas como lidas
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="flex-1 text-xs"
+                          onClick={() => router.push('/notifications')}
+                        >
+                          Ver todas
+                        </Button>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
