@@ -17,7 +17,6 @@ export function useNotifications() {
   const { isConnected, connectionId } = useSSE();
 
   const addNotification = useCallback((notification: Omit<Notification, 'id' | 'isRead'>) => {
-    console.log('useNotifications: Adicionando notificação:', notification);
     const newNotification: Notification = {
       ...notification,
       id: crypto.randomUUID(),
@@ -41,15 +40,11 @@ export function useNotifications() {
   }, []);
 
   useEffect(() => {
-    console.log('useNotifications: Configurando listener para mensagens SSE...');
     
     const handleSSEMessage = (event: CustomEvent) => {
-      console.log('useNotifications: Evento SSE recebido:', event);
-      console.log('useNotifications: Detalhes do evento:', event.detail);
       
       const message = event.detail;
       if (message && message.type && message.title && message.content) {
-        console.log('useNotifications: Mensagem válida, adicionando notificação');
         addNotification({
           type: message.type,
           title: message.title,
@@ -64,10 +59,8 @@ export function useNotifications() {
     };
 
     window.addEventListener('sse-message', handleSSEMessage as EventListener);
-    console.log('useNotifications: Listener configurado com sucesso');
 
     return () => {
-      console.log('useNotifications: Removendo listener');
       window.removeEventListener('sse-message', handleSSEMessage as EventListener);
     };
   }, [addNotification]);
@@ -75,8 +68,6 @@ export function useNotifications() {
   const unreadCount = notifications.filter(n => !n.isRead).length;
 
   useEffect(() => {
-    console.log('useNotifications: Notificações atualizadas:', notifications.length);
-    console.log('useNotifications: Contagem de não lidas:', unreadCount);
   }, [notifications, unreadCount]);
 
   return {

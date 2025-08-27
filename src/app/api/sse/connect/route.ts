@@ -23,7 +23,6 @@ export async function GET(req: NextRequest) {
           if (done) break;
 
           const chunk = decoder.decode(value, { stream: true });
-          console.log("Chunk do backend:", JSON.stringify(chunk));
 
           buffer += chunk;
 
@@ -38,15 +37,9 @@ export async function GET(req: NextRequest) {
               const msg = line.replace(/^data:\s*/, "");
               const payload = `event: message\ndata: ${msg}\n\n`;
               controller.enqueue(encoder.encode(payload));
-              console.log("Proxy repassando:", payload);
-            } else {
-              console.log("Linha ignorada do backend:", line);
-            }
+            } 
           }
         }
-      },
-      cancel() {
-        console.log("Proxy cancelado pelo cliente");
       },
     }),
     {

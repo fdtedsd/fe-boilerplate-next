@@ -13,22 +13,18 @@ export function useSSE() {
   const eventSourceRef = useRef<EventSource | null>(null);
 
   useEffect(() => {
-    console.log("Iniciando conexão SSE...");
 
     const eventSource = new EventSource("/api/sse/connect");
     eventSourceRef.current = eventSource;
 
     eventSource.onopen = () => {
-      console.log("Conexão SSE aberta");
       setIsConnected(true);
     };
 
     eventSource.onmessage = (event) => {
-      console.log("Mensagem SSE recebida (raw):", event.data);
 
       try {
         const data: SSEData = JSON.parse(event.data);
-        console.log("Parsed SSE:", data);
 
         if (data.connectionId) {
           setConnectionId(data.connectionId);
@@ -46,7 +42,6 @@ export function useSSE() {
     };
 
     return () => {
-      console.log("Fechando conexão SSE...");
       eventSource.close();
       setIsConnected(false);
     };

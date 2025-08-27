@@ -71,11 +71,6 @@ export function Navigation() {
   const [user] = useAtom(currentUserAtom);
   const [, logout] = useAtom(logoutAtom);
   
-  // Hook para notificações SSE
-  console.log('🔔 Navigation - User:', user);
-  console.log('🔔 Navigation - User ID:', user?.id);
-  console.log('🔔 Navigation - Is Authenticated:', isAuthenticated);
-  
   const {
     notifications,
     unreadCount,
@@ -84,9 +79,6 @@ export function Navigation() {
     removeNotification,
     formatTimestamp,
   } = useNotifications();
-  
-  console.log('🔔 Navigation - Notifications count:', notifications.length);
-  console.log('🔔 Navigation - Unread count:', unreadCount);
 
   // Inicializar o i18n com o idioma do localStorage na primeira renderização
   useEffect(() => {

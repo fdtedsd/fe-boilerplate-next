@@ -9,18 +9,6 @@ export default function NotificationsPage() {
   useEffect(() => {
     const es = new EventSource("/api/sse/connect");
   
-    es.onopen = () => console.log("🔗 Conectado ao SSE");
-  
-    es.addEventListener("connected", (e) => {
-      const data = JSON.parse((e as MessageEvent).data);
-      console.log("🆔 ConnectionID:", data.connectionId);
-    });
-  
-    es.onmessage = (e) => {
-      console.log("Mensagem recebida:", e.data);
-    };
-  
-    es.onerror = (err) => console.error("SSE error:", err);
   
     return () => es.close();
   }, []);
