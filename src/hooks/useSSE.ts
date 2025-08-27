@@ -13,8 +13,7 @@ export function useSSE() {
   const eventSourceRef = useRef<EventSource | null>(null);
 
   useEffect(() => {
-
-    const eventSource = new EventSource("/api/sse/connect");
+    const eventSource = new EventSource('/api/sse/connect');
     eventSourceRef.current = eventSource;
 
     eventSource.onopen = () => {
@@ -22,7 +21,6 @@ export function useSSE() {
     };
 
     eventSource.onmessage = (event) => {
-
       try {
         const data: SSEData = JSON.parse(event.data);
 
@@ -41,12 +39,12 @@ export function useSSE() {
           }
         }
       } catch (err) {
-        console.error("Erro ao parsear SSE:", err, event.data);
+        console.error('Erro ao parsear SSE:', err, event.data);
       }
     };
 
     eventSource.onerror = (err) => {
-      console.error("Erro SSE:", err);
+      console.error('Erro SSE:', err);
       setIsConnected(false);
     };
 

@@ -1,8 +1,4 @@
 import { useEffect, useCallback, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-
-const {t} = useTranslation;
-
 
 interface Notification {
   id: string;
@@ -23,21 +19,21 @@ export function useNotifications() {
       id: crypto.randomUUID(),
       isRead: false,
     };
-    setNotifications(prev => [newNotification, ...prev]);
+    setNotifications((prev) => [newNotification, ...prev]);
   }, []);
 
   const markAsRead = useCallback((notificationId: string) => {
-    setNotifications(prev => 
-      prev.map(n => n.id === notificationId ? { ...n, isRead: true } : n)
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === notificationId ? { ...n, isRead: true } : n)),
     );
   }, []);
 
   const markAllAsRead = useCallback(() => {
-    setNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
+    setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
   }, []);
 
   const removeNotification = useCallback((notificationId: string) => {
-    setNotifications(prev => prev.filter(n => n.id !== notificationId));
+    setNotifications((prev) => prev.filter((n) => n.id !== notificationId));
   }, []);
 
   const clearAll = useCallback(() => {
@@ -45,17 +41,20 @@ export function useNotifications() {
   }, []);
 
   useEffect(() => {
-    
     const handleSSEMessage = (event: CustomEvent) => {
       const payload: any = event.detail;
       if (!payload?.type) return;
-      if (payload.type === 'connected' || payload.type === 'ping' || payload.type === 'keepalive') return;
+      if (payload.type === 'connected' || payload.type === 'ping' || payload.type === 'keepalive')
+        return;
       const normalizedTitle = payload.title || payload.event || payload.type || 'Notificação';
       const normalizedContent = payload.content ?? payload.message;
       if (!normalizedContent) return;
 
       const normalizedTimestamp = payload.timestamp || undefined;
-      const contentString = typeof normalizedContent === 'string' ? normalizedContent : JSON.stringify(normalizedContent);
+      const contentString =
+        typeof normalizedContent === 'string'
+          ? normalizedContent
+          : JSON.stringify(normalizedContent);
       const deduplicateKey = payload.id
         ? String(payload.id)
         : normalizedTimestamp
@@ -73,11 +72,17 @@ export function useNotifications() {
       }
 
       addNotification({
-        type: (payload.type === 'message' || payload.type === 'notification' || payload.type === 'reminder')
-          ? payload.type
-          : 'notification',
+        type:
+          payload.type === 'message' ||
+          payload.type === 'notification' ||
+          payload.type === 'reminder'
+            ? payload.type
+            : 'notification',
         title: normalizedTitle,
-        content: typeof normalizedContent === 'string' ? normalizedContent : JSON.stringify(normalizedContent),
+        content:
+          typeof normalizedContent === 'string'
+            ? normalizedContent
+            : JSON.stringify(normalizedContent),
         timestamp: normalizedTimestamp || new Date().toISOString(),
       });
     };
@@ -89,10 +94,9 @@ export function useNotifications() {
     };
   }, [addNotification]);
 
-  const unreadCount = notifications.filter(n => !n.isRead).length;
+  const unreadCount = notifications.filter((n) => !n.isRead).length;
 
-  useEffect(() => {
-  }, [notifications, unreadCount]);
+  useEffect(() => {}, [notifications, unreadCount]);
 
   const formatTimestamp = useCallback((isoString: string) => {
     try {

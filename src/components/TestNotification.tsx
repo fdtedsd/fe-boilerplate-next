@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
 import { Bell, Send } from 'lucide-react';
@@ -16,7 +17,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-
 import { useSSE } from '@/hooks/useSSE';
 
 export function TestNotification() {
@@ -26,7 +26,7 @@ export function TestNotification() {
   const [formData, setFormData] = useState({
     type: 'Notification' as 'Message' | 'Notification' | 'Reminder',
     title: t('testNotification.defaultValues.title'),
-      content: t('testNotification.defaultValues.content'),
+    content: t('testNotification.defaultValues.content'),
   });
 
   // Atualizar os valores padrão quando a tradução estiver disponível
@@ -73,7 +73,8 @@ export function TestNotification() {
     } catch (error) {
       setResult(
         t('testNotification.messages.error', {
-          error: error instanceof Error ? error.message : t('testNotification.messages.unknownError'),
+          error:
+            error instanceof Error ? error.message : t('testNotification.messages.unknownError'),
         }),
       );
     } finally {
@@ -109,7 +110,8 @@ export function TestNotification() {
     } catch (error) {
       setResult(
         t('testNotification.messages.error', {
-          error: error instanceof Error ? error.message : t('testNotification.messages.unknownError'),
+          error:
+            error instanceof Error ? error.message : t('testNotification.messages.unknownError'),
         }),
       );
     } finally {
@@ -150,7 +152,9 @@ export function TestNotification() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="Message">{t('testNotification.types.message')}</SelectItem>
-                <SelectItem value="Notification">{t('testNotification.types.notification')}</SelectItem>
+                <SelectItem value="Notification">
+                  {t('testNotification.types.notification')}
+                </SelectItem>
                 <SelectItem value="Reminder">{t('testNotification.types.reminder')}</SelectItem>
               </SelectContent>
             </Select>
@@ -181,11 +185,15 @@ export function TestNotification() {
         <div className="flex gap-2">
           <Button onClick={broadcastToBackend} disabled={isSending} className="flex-1">
             <Send className="h-4 w-4 mr-2" />
-            {isSending ? t('testNotification.buttons.sending') : t('testNotification.buttons.sendToAll')}
+            {isSending
+              ? t('testNotification.buttons.sending')
+              : t('testNotification.buttons.sendToAll')}
           </Button>
           <Button onClick={messageConnection} disabled={isSending} className="flex-1">
             <Send className="h-4 w-4 mr-2" />
-            {isSending ? t('testNotification.buttons.sending') : t('testNotification.buttons.sendToCurrent')}
+            {isSending
+              ? t('testNotification.buttons.sending')
+              : t('testNotification.buttons.sendToCurrent')}
           </Button>
         </div>
 

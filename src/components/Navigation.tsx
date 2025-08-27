@@ -9,9 +9,9 @@ import { Bell, Globe, LogIn, LogOut, Menu, Palette, Trash2, User } from 'lucide-
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+import { useNotifications } from '@/hooks/useNotifications';
 import { currentUserAtom, isAuthenticatedAtom, logoutAtom } from '@/store/atoms/auth';
 import { languageAtom } from '@/store/atoms/language';
-import { useNotifications } from '@/hooks/useNotifications';
 
 import { ThemeToggleButton } from './ThemeToggleButton';
 import { Button } from './ui/button';
@@ -70,7 +70,7 @@ export function Navigation() {
   const [isAuthenticated] = useAtom(isAuthenticatedAtom);
   const [user] = useAtom(currentUserAtom);
   const [, logout] = useAtom(logoutAtom);
-  
+
   const {
     notifications,
     unreadCount,
@@ -153,24 +153,23 @@ export function Navigation() {
                   <div className="px-3 py-2 border-b">
                     <h3 className="font-semibold text-sm">Notificações</h3>
                     <p className="text-xs text-muted-foreground">
-                      {unreadCount > 0 
+                      {unreadCount > 0
                         ? `Você tem ${unreadCount} notificação${unreadCount > 1 ? 'es' : ''} não lida${unreadCount > 1 ? 's' : ''}`
-                        : 'Nenhuma notificação não lida'
-                      }
+                        : 'Nenhuma notificação não lida'}
                     </p>
                   </div>
 
                   <div className="max-h-64 overflow-y-auto">
                     {notifications.length > 0 ? (
                       notifications.map((notification) => (
-                        <DropdownMenuItem 
-                          key={notification.id} 
+                        <DropdownMenuItem
+                          key={notification.id}
                           className={`flex flex-col items-start p-3 cursor-pointer hover:bg-accent group ${
                             !notification.isRead ? 'bg-blue-50 dark:bg-blue-950/20' : ''
                           }`}
                           onClick={() => markAsRead(notification.id)}
                         >
-                          <div className="flex items-start gap-2 w-full">                              
+                          <div className="flex items-start gap-2 w-full">
                             <div className="flex-1 min-w-0">
                               <p className="text-sm font-medium">{notification.title}</p>
                               <p className="text-xs text-muted-foreground truncate">
@@ -180,7 +179,7 @@ export function Navigation() {
                                 {formatTimestamp(notification.timestamp)}
                               </p>
                             </div>
-                            
+
                             {/* Botão para remover */}
                             <Button
                               variant="ghost"
@@ -207,9 +206,9 @@ export function Navigation() {
                   {notifications.length > 0 && (
                     <div className="px-3 py-2 border-t">
                       <div className="flex gap-2">
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
+                        <Button
+                          variant="outline"
+                          size="sm"
                           className="flex-1 text-xs"
                           onClick={markAllAsRead}
                         >

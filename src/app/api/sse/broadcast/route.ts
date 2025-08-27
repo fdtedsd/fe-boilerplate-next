@@ -7,16 +7,12 @@ export async function POST(request: NextRequest) {
 
     if (!type || !title || !content) {
       return NextResponse.json(
-        { error: 'type, title, and content are required' },
-        { status: 400 }
+        `{·error:·'type,·title,·and·content·are·required'·},·{·status:·400·}`,
       );
     }
 
     if (!['Message', 'Notification', 'Reminder'].includes(type)) {
-      return NextResponse.json(
-        { error: 'Invalid message type' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Invalid message type' }, { status: 400 });
     }
 
     const backendUrl = process.env.BACKEND_SSE_URL || 'http://localhost:3000';
@@ -44,7 +40,7 @@ export async function POST(request: NextRequest) {
     console.error('Error in SSE broadcast route:', error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
