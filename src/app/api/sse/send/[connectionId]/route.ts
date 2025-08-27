@@ -4,10 +4,10 @@ export const runtime = "nodejs";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { connectionId: string } }
+  { params }: { params: Promise<{ connectionId: string }> }
 ) {
   try {
-    const { connectionId } = params;
+    const { connectionId } = await params;
     const body = await request.json();
     const { type, title, content } = body;
 

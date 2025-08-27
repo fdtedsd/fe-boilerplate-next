@@ -176,11 +176,6 @@ export function Navigation() {
                               <p className="text-xs text-muted-foreground truncate">
                                 {notification.content}
                               </p>
-                              {notification.sender && (
-                                <p className="text-xs text-muted-foreground mt-1">
-                                  De: {notification.sender}
-                                </p>
-                              )}
                               <p className="text-xs text-muted-foreground mt-1">
                                 {formatTimestamp(notification.timestamp)}
                               </p>

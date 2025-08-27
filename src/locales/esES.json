@@ -328,7 +328,6 @@
       "type": "Tipo",
       "title": "Título",
       "content": "Contenido",
-      "sender": "Remitente",
       "titlePlaceholder": "Título de la notificación",
       "contentPlaceholder": "Contenido de la notificación"
     },
