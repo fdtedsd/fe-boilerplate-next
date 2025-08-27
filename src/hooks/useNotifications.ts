@@ -1,4 +1,8 @@
 import { useEffect, useCallback, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+const {t} = useTranslation;
+
 
 interface Notification {
   id: string;
@@ -7,7 +11,6 @@ interface Notification {
   content: string;
   timestamp: string;
   isRead: boolean;
-  sender?: string;
 }
 
 export function useNotifications() {
@@ -76,7 +79,6 @@ export function useNotifications() {
         title: normalizedTitle,
         content: typeof normalizedContent === 'string' ? normalizedContent : JSON.stringify(normalizedContent),
         timestamp: normalizedTimestamp || new Date().toISOString(),
-        sender: payload.sender,
       });
     };
 

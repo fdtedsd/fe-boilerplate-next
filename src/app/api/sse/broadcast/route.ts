@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { type, title, content, sender } = body;
+    const { type, title, content } = body;
 
     if (!type || !title || !content) {
       return NextResponse.json(
@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!['message', 'notification', 'reminder'].includes(type)) {
+    if (!['Message', 'Notification', 'Reminder'].includes(type)) {
       return NextResponse.json(
         { error: 'Invalid message type' },
         { status: 400 }
@@ -29,7 +29,6 @@ export async function POST(request: NextRequest) {
         type,
         title,
         content,
-        sender,
         timestamp: new Date().toISOString(),
       }),
     });

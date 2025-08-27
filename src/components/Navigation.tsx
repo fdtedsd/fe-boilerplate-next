@@ -220,14 +220,6 @@ export function Navigation() {
                         >
                           Marcar todas como lidas
                         </Button>
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          className="flex-1 text-xs"
-                          onClick={() => router.push('/notifications')}
-                        >
-                          Ver todas
-                        </Button>
                       </div>
                     </div>
                   )}

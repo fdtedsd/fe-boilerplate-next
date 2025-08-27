@@ -9,16 +9,16 @@ export async function POST(
   try {
     const { connectionId } = params;
     const body = await request.json();
-    const { type, title, content, sender } = body;
+    const { type, title, content } = body;
 
     if (!type || !title || !content) {
       return NextResponse.json(
-        { error: 'type, title, and content are required' },
+        { error: 'Type, title, and content are required' },
         { status: 400 }
       );
     }
 
-    if (!['message', 'notification', 'reminder'].includes(type)) {
+    if (!['Message', 'Notification', 'Reminder'].includes(type)) {
       return NextResponse.json(
         { error: 'Invalid message type' },
         { status: 400 }
@@ -26,6 +26,7 @@ export async function POST(
     }
 
     const backendUrl = process.env.BACKEND_SSE_URL || 'http://localhost:3000';
+    console.log(connectionId)
     const response = await fetch(`${backendUrl}/sse/send/${connectionId}`, {
       method: 'POST',
       headers: {
@@ -35,7 +36,6 @@ export async function POST(
         type,
         title,
         content,
-        sender,
         timestamp: new Date().toISOString(),
       }),
     });

@@ -9,6 +9,10 @@
     "dashboard": "Dashboard",
     "notifications": "Notifications"
   },
+  "notifications": {
+    "title": "SSE Notification System",
+    "description": "Test the real-time notification system with Server Side Events"
+  },
   "home": {
     "title": "FDTE Boilerplate",
     "subtitle": "Modern boilerplate for Next.js applications with TypeScript, shadcn/ui, internationalization and complete Design Tokens system.",
@@ -311,6 +315,40 @@
       "logout": "Logout",
       "demoInfo": "Demo Information",
       "demoDescription": "This is a mock authentication system for demonstration. In production, connect to a real authentication API."
+    }
+  },
+  "testNotification": {
+    "title": "Notification Test",
+    "status": "SSE Status",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "connectionId": "Connection ID",
+    "notConnected": "Not connected",
+    "form": {
+      "type": "Type",
+      "title": "Title",
+      "content": "Content",
+      "titlePlaceholder": "Notification title",
+      "contentPlaceholder": "Notification content"
+    },
+    "types": {
+      "message": "Message",
+      "notification": "Notification",
+      "reminder": "Reminder"
+    },
+    "buttons": {
+      "sendToAll": "Send to all connections",
+      "sendToCurrent": "Send to current Connection ID",
+      "sending": "Sending..."
+    },
+    "messages": {
+      "success": "Message sent to backend successfully!",
+      "error": "Error sending to backend",
+      "unknownError": "Unknown error"
+    },
+    "defaultValues": {
+      "title": "Test Notification",
+      "content": "This is a test notification to verify if the system is working."
     }
   }
 }

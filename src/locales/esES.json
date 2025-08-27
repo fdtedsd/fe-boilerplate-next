@@ -9,6 +9,10 @@
     "dashboard": "Dashboard",
     "notifications": "Notificaciones"
   },
+  "notifications": {
+    "title": "Sistema de Notificaciones SSE",
+    "description": "Prueba el sistema de notificaciones en tiempo real con Server Side Events"
+  },
   "home": {
     "title": "FDTE Boilerplate",
     "subtitle": "Boilerplate moderno para aplicaciones Next.js con TypeScript, shadcn/ui, internacionalización y sistema completo de Design Tokens.",
@@ -311,6 +315,41 @@
       "logout": "Cerrar sesión",
       "demoInfo": "Información de la Demostración",
       "demoDescription": "Este es un sistema de autenticación mock para demostración. En producción, conéctate a una API real de autenticación."
+    }
+  },
+  "testNotification": {
+    "title": "Prueba de Notificaciones",
+    "status": "Estado SSE",
+    "connected": "Conectado",
+    "disconnected": "Desconectado",
+    "connectionId": "Connection ID",
+    "notConnected": "No conectado",
+    "form": {
+      "type": "Tipo",
+      "title": "Título",
+      "content": "Contenido",
+      "sender": "Remitente",
+      "titlePlaceholder": "Título de la notificación",
+      "contentPlaceholder": "Contenido de la notificación"
+    },
+    "types": {
+      "message": "Mensaje",
+      "notification": "Notificación",
+      "reminder": "Recordatorio"
+    },
+    "buttons": {
+      "sendToAll": "Enviar a todas las conexiones",
+      "sendToCurrent": "Enviar al Connection ID actual",
+      "sending": "Enviando..."
+    },
+    "messages": {
+      "success": "¡Mensaje enviado al backend exitosamente!",
+      "error": "Error al enviar al backend",
+      "unknownError": "Error desconocido"
+    },
+    "defaultValues": {
+      "title": "Notificación de Prueba",
+      "content": "Esta es una notificación de prueba para verificar si el sistema está funcionando."
     }
   }
 }
