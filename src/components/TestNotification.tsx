@@ -16,7 +16,6 @@ export function TestNotification() {
     type: 'notification' as 'message' | 'notification' | 'reminder',
     title: 'Notificação de Teste',
     content: 'Esta é uma notificação de teste para verificar se o sistema está funcionando.',
-    priority: 'medium' as 'low' | 'medium' | 'high',
     sender: 'Sistema de Teste',
   });
 
@@ -41,7 +40,6 @@ export function TestNotification() {
           type: formData.type,
           title: formData.title,
           content: formData.content,
-          priority: formData.priority,
           sender: formData.sender,
           timestamp: new Date().toISOString(),
         }),
@@ -90,19 +88,6 @@ export function TestNotification() {
                 <SelectItem value="message">Mensagem</SelectItem>
                 <SelectItem value="notification">Notificação</SelectItem>
                 <SelectItem value="reminder">Lembrete</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div>
-            <Label htmlFor="priority">Prioridade</Label>
-            <Select value={formData.priority} onValueChange={(value) => handleInputChange('priority', value)}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="low">Baixa</SelectItem>
-                <SelectItem value="medium">Média</SelectItem>
-                <SelectItem value="high">Alta</SelectItem>
               </SelectContent>
             </Select>
           </div>

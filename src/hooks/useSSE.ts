@@ -31,6 +31,15 @@ export function useSSE() {
         }
 
         setMessages((prev) => [...prev, data]);
+
+        // Dispara evento global para que outros hooks (ex.: useNotifications) consumam
+        if (typeof window !== 'undefined') {
+          try {
+            window.dispatchEvent(new CustomEvent('sse-message', { detail: data }));
+          } catch (e) {
+            console.error('Erro ao disparar evento sse-message', e);
+          }
+        }
       } catch (err) {
         console.error("Erro ao parsear SSE:", err, event.data);
       }

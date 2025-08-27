@@ -170,13 +170,7 @@ export function Navigation() {
                           }`}
                           onClick={() => markAsRead(notification.id)}
                         >
-                          <div className="flex items-start gap-2 w-full">
-                            {/* Indicador de prioridade */}
-                            <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
-                              notification.priority === 'high' ? 'bg-red-500' :
-                              notification.priority === 'medium' ? 'bg-blue-500' : 'bg-yellow-500'
-                            }`}></div>
-                            
+                          <div className="flex items-start gap-2 w-full">                              
                             <div className="flex-1 min-w-0">
                               <p className="text-sm font-medium">{notification.title}</p>
                               <p className="text-xs text-muted-foreground truncate">
