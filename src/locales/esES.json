@@ -349,6 +349,11 @@
     "defaultValues": {
       "title": "Notificación de Prueba",
       "content": "Esta es una notificación de prueba para verificar si el sistema está funcionando."
+    },
+    "errors": {
+      "typeRequired": "Por favor seleccione el tipo",
+      "titleRequired": "Por favor ingrese el título",
+      "contentRequired": "Por favor ingrese el contenido"
     }
   }
 }

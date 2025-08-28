@@ -349,6 +349,11 @@
     "defaultValues": {
       "title": "Test Notification",
       "content": "This is a test notification to verify if the system is working."
+    },
+    "errors": {
+      "typeRequired": "Please select the type",
+      "titleRequired": "Please enter the title",
+      "contentRequired": "Please enter the content"
     }
   }
 }

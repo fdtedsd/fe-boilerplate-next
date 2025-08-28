@@ -349,6 +349,11 @@
     "defaultValues": {
       "title": "Notificação de Teste",
       "content": "Esta é uma notificação de teste para verificar se o sistema está funcionando."
+    },
+    "errors": {
+      "typeRequired": "Preencha o tipo",
+      "titleRequired": "Preencha o título",
+      "contentRequired": "Preencha o conteúdo"
     }
   }
 }
