@@ -154,8 +154,8 @@ export function Navigation() {
                     <h3 className="font-semibold text-sm">Notificações</h3>
                     <p className="text-xs text-muted-foreground">
                       {unreadCount > 0
-                        ? `Você tem ${unreadCount} notificação${unreadCount > 1 ? 'es' : ''} não lida${unreadCount > 1 ? 's' : ''}`
-                        : 'Nenhuma notificação não lida'}
+                        ? t('notifications.unread', { count: unreadCount })
+                        : t('notifications.none')}
                     </p>
                   </div>
 
@@ -197,7 +197,9 @@ export function Navigation() {
                       ))
                     ) : (
                       <div className="px-3 py-8 text-center">
-                        <p className="text-sm text-muted-foreground">Nenhuma notificação</p>
+                        <p className="text-sm text-muted-foreground">
+                          {t('notifications.noNotification')}
+                        </p>
                       </div>
                     )}
                   </div>
@@ -212,7 +214,7 @@ export function Navigation() {
                           className="flex-1 text-xs"
                           onClick={markAllAsRead}
                         >
-                          Marcar todas como lidas
+                          {t('notifications.markRead')}
                         </Button>
                       </div>
                     </div>

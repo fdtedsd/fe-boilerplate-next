@@ -11,7 +11,12 @@
   },
   "notifications": {
     "title": "Sistema de Notificaciones SSE",
-    "description": "Prueba el sistema de notificaciones en tiempo real con Server Side Events"
+    "description": "Prueba el sistema de notificaciones en tiempo real con Server Side Events",
+    "none": "Ninguna notificación sin leer",
+    "unread": "Tienes {{count}} notificación sin leer",
+    "unread_plural": "Tienes {{count}} notificaciones sin leer",
+    "noNotification": "Sin notificación",
+    "markRead": "Marcar todo como leído"
   },
   "home": {
     "title": "FDTE Boilerplate",

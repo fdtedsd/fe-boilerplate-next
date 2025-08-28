@@ -11,7 +11,14 @@
   },
   "notifications": {
     "title": "SSE Notification System",
-    "description": "Test the real-time notification system with Server Side Events"
+    "description": "Test the real-time notification system with Server Side Events",
+    "none": "No unread notifications",
+    "unread": "You have {{count}} unread notification",
+    "unread_plural": "You have {{count}} unread notifications",
+    "noNotification": "No notification",
+    "markRead": "Mark all as read"
+
+
   },
   "home": {
     "title": "FDTE Boilerplate",
