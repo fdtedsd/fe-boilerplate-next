@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -20,14 +20,14 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import { useNotificationSender } from '@/hooks/useNotificationSender';
 import { useSSE } from '@/hooks/useSSE';
 import { cn } from '@/lib/utils';
 
 export function TestNotification() {
   const { t } = useTranslation();
   const { connectionId, isConnected } = useSSE();
-  const [isSending, setIsSending] = useState(false);
-  const [result, setResult] = useState<string>('');
+  const { sendNotification, isSending, result } = useNotificationSender();
 
   const schema = z.object({
     type: z.enum(['Message', 'Notification', 'Reminder'], {
@@ -64,40 +64,6 @@ export function TestNotification() {
     });
   }, [t, reset]);
 
-  const send = async (data: FormData, url: string) => {
-    setIsSending(true);
-    setResult('');
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...data,
-          timestamp: new Date().toISOString(),
-        }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `Backend responded with ${response.status}`);
-      }
-
-      setResult(t('testNotification.messages.success'));
-    } catch (error) {
-      setResult(
-        t('testNotification.messages.error', {
-          error:
-            error instanceof Error ? error.message : t('testNotification.messages.unknownError'),
-        }),
-      );
-    } finally {
-      setIsSending(false);
-    }
-  };
-
   return (
     <Card>
       <CardHeader>
@@ -119,7 +85,7 @@ export function TestNotification() {
         </div>
 
         <form
-          onSubmit={handleSubmit((data) => send(data, '/api/sse/broadcast'))}
+          onSubmit={handleSubmit((data) => sendNotification(data, '/api/sse/broadcast', t))}
           className="space-y-4"
         >
           <div>
@@ -188,7 +154,9 @@ export function TestNotification() {
             </Button>
             <Button
               type="button"
-              onClick={handleSubmit((data) => send(data, `/api/sse/send/${connectionId}`))}
+              onClick={handleSubmit((data) =>
+                sendNotification(data, `/api/sse/send/${connectionId}`, t),
+              )}
               disabled={isSending}
               className="flex-1"
             >
