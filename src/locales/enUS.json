@@ -6,7 +6,19 @@
     "designTokens": "Design Tokens",
     "atoms": "State (Jotai)",
     "forms": "Forms",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "notifications": "Notifications"
+  },
+  "notifications": {
+    "title": "SSE Notification System",
+    "description": "Test the real-time notification system with Server Side Events",
+    "none": "No unread notifications",
+    "unread": "You have {{count}} unread notification",
+    "unread_plural": "You have {{count}} unread notifications",
+    "noNotification": "No notification",
+    "markRead": "Mark all as read"
+
+
   },
   "home": {
     "title": "FDTE Boilerplate",
@@ -310,6 +322,45 @@
       "logout": "Logout",
       "demoInfo": "Demo Information",
       "demoDescription": "This is a mock authentication system for demonstration. In production, connect to a real authentication API."
+    }
+  },
+  "testNotification": {
+    "title": "Notification Test",
+    "status": "SSE Status",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "connectionId": "Connection ID",
+    "notConnected": "Not connected",
+    "form": {
+      "type": "Type",
+      "title": "Title",
+      "content": "Content",
+      "titlePlaceholder": "Notification title",
+      "contentPlaceholder": "Notification content"
+    },
+    "types": {
+      "message": "Message",
+      "notification": "Notification",
+      "reminder": "Reminder"
+    },
+    "buttons": {
+      "sendToAll": "Send to all connections",
+      "sendToCurrent": "Send to current Connection ID",
+      "sending": "Sending..."
+    },
+    "messages": {
+      "success": "Message sent to backend successfully!",
+      "error": "Error sending to backend",
+      "unknownError": "Unknown error"
+    },
+    "defaultValues": {
+      "title": "Test Notification",
+      "content": "This is a test notification to verify if the system is working."
+    },
+    "errors": {
+      "typeRequired": "Please select the type",
+      "titleRequired": "Please enter the title",
+      "contentRequired": "Please enter the content"
     }
   }
 }

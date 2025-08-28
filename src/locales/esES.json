@@ -6,7 +6,17 @@
     "designTokens": "Design Tokens",
     "atoms": "Estado (Jotai)",
     "forms": "Formularios",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "notifications": "Notificaciones"
+  },
+  "notifications": {
+    "title": "Sistema de Notificaciones SSE",
+    "description": "Prueba el sistema de notificaciones en tiempo real con Server Side Events",
+    "none": "Ninguna notificación sin leer",
+    "unread": "Tienes {{count}} notificación sin leer",
+    "unread_plural": "Tienes {{count}} notificaciones sin leer",
+    "noNotification": "Sin notificación",
+    "markRead": "Marcar todo como leído"
   },
   "home": {
     "title": "FDTE Boilerplate",
@@ -310,6 +320,45 @@
       "logout": "Cerrar sesión",
       "demoInfo": "Información de la Demostración",
       "demoDescription": "Este es un sistema de autenticación mock para demostración. En producción, conéctate a una API real de autenticación."
+    }
+  },
+  "testNotification": {
+    "title": "Prueba de Notificaciones",
+    "status": "Estado SSE",
+    "connected": "Conectado",
+    "disconnected": "Desconectado",
+    "connectionId": "Connection ID",
+    "notConnected": "No conectado",
+    "form": {
+      "type": "Tipo",
+      "title": "Título",
+      "content": "Contenido",
+      "titlePlaceholder": "Título de la notificación",
+      "contentPlaceholder": "Contenido de la notificación"
+    },
+    "types": {
+      "message": "Mensaje",
+      "notification": "Notificación",
+      "reminder": "Recordatorio"
+    },
+    "buttons": {
+      "sendToAll": "Enviar a todas las conexiones",
+      "sendToCurrent": "Enviar al Connection ID actual",
+      "sending": "Enviando..."
+    },
+    "messages": {
+      "success": "¡Mensaje enviado al backend exitosamente!",
+      "error": "Error al enviar al backend",
+      "unknownError": "Error desconocido"
+    },
+    "defaultValues": {
+      "title": "Notificación de Prueba",
+      "content": "Esta es una notificación de prueba para verificar si el sistema está funcionando."
+    },
+    "errors": {
+      "typeRequired": "Por favor seleccione el tipo",
+      "titleRequired": "Por favor ingrese el título",
+      "contentRequired": "Por favor ingrese el contenido"
     }
   }
 }

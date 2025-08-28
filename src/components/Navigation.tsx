@@ -5,10 +5,11 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAtom } from 'jotai';
-import { Globe, LogIn, LogOut, Menu, Palette, User } from 'lucide-react';
+import { Bell, Globe, LogIn, LogOut, Menu, Palette, Trash2, User } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+import { useNotifications } from '@/hooks/useNotifications';
 import { currentUserAtom, isAuthenticatedAtom, logoutAtom } from '@/store/atoms/auth';
 import { languageAtom } from '@/store/atoms/language';
 
@@ -55,6 +56,11 @@ const navigationItems = [
     key: 'dashboard',
     icon: '🔒',
   },
+  {
+    href: '/notifications',
+    key: 'notifications',
+    icon: '🔔',
+  },
 ];
 
 export function Navigation() {
@@ -64,6 +70,15 @@ export function Navigation() {
   const [isAuthenticated] = useAtom(isAuthenticatedAtom);
   const [user] = useAtom(currentUserAtom);
   const [, logout] = useAtom(logoutAtom);
+
+  const {
+    notifications,
+    unreadCount,
+    markAsRead,
+    markAllAsRead,
+    removeNotification,
+    formatTimestamp,
+  } = useNotifications();
 
   // Inicializar o i18n com o idioma do localStorage na primeira renderização
   useEffect(() => {
@@ -119,6 +134,95 @@ export function Navigation() {
 
           {/* Actions - Direita */}
           <div className="flex items-center gap-2">
+            {/* Notification Bell */}
+            {isAuthenticated && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="h-9 w-9 relative">
+                    <Bell className="h-4 w-4" />
+                    {/* Badge de notificações não lidas */}
+                    {unreadCount > 0 && (
+                      <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 text-xs text-white flex items-center justify-center">
+                        {unreadCount > 99 ? '99+' : unreadCount}
+                      </span>
+                    )}
+                    <span className="sr-only">Notificações</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-80">
+                  <div className="px-3 py-2 border-b">
+                    <h3 className="font-semibold text-sm">Notificações</h3>
+                    <p className="text-xs text-muted-foreground">
+                      {unreadCount > 0
+                        ? t('notifications.unread', { count: unreadCount })
+                        : t('notifications.none')}
+                    </p>
+                  </div>
+
+                  <div className="max-h-64 overflow-y-auto">
+                    {notifications.length > 0 ? (
+                      notifications.map((notification) => (
+                        <DropdownMenuItem
+                          key={notification.id}
+                          className={`flex flex-col items-start p-3 cursor-pointer hover:bg-accent group ${
+                            !notification.isRead ? 'bg-blue-50 dark:bg-blue-950/20' : ''
+                          }`}
+                          onClick={() => markAsRead(notification.id)}
+                        >
+                          <div className="flex items-start gap-2 w-full">
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium">{notification.title}</p>
+                              <p className="text-xs text-muted-foreground truncate">
+                                {notification.content}
+                              </p>
+                              <p className="text-xs text-muted-foreground mt-1">
+                                {formatTimestamp(notification.timestamp)}
+                              </p>
+                            </div>
+
+                            {/* Botão para remover */}
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                removeNotification(notification.id);
+                              }}
+                            >
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </DropdownMenuItem>
+                      ))
+                    ) : (
+                      <div className="px-3 py-8 text-center">
+                        <p className="text-sm text-muted-foreground">
+                          {t('notifications.noNotification')}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Footer com ações */}
+                  {notifications.length > 0 && (
+                    <div className="px-3 py-2 border-t">
+                      <div className="flex gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex-1 text-xs"
+                          onClick={markAllAsRead}
+                        >
+                          {t('notifications.markRead')}
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+
             {/* Auth Button */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
